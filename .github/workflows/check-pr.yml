@@ -54,4 +54,4 @@ jobs:
             distribution: 'temurin'
             cache: maven
         - name: Build and test with Maven
-          run: mvn --batch-mode -x package
+          run: mvn --batch-mode -X package
