@@ -21,13 +21,14 @@ jobs:
         cache: maven
     
     - name: install with Maven
-      run: mvn install:install-file "-DgroupId=org.mozilla" "-DartifactId=jss" "-Dversion=4.2.5" "-Dpackaging=jar" "-Dfile=C:\Users\AArmijos\workspace\componentes-1.0.4\deps\jss-4.2.5.jar" 
-    - name: Build with Maven
-      run: mvn clean verify
+      run: | 
+           mvn -B package --file pom.xml
+           mkdir artifacts && cp target/*.jar artifacts
+           cd artifacts && ls
  
     - name: Test Report
       uses: actions/upload-artifact@v3
       if: success() || failure()
       with:
           name: SpringBoot Report               # Name of the folder
-          path: target/site/serenity/           # Path to test results
+          path: artifacts           # Path to test results
